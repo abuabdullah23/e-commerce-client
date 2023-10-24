@@ -154,8 +154,8 @@ const Headers = () => {
             </div>
 
             {/* hide sidebar > 991px : for responsive */}
-            <div className='hidden md-lg:block'>
-                <div onClick={() => setShowSidebar(false)} className={`fixed transition-all duration-200 hidden md-lg:block w-screen h-screen bg-[rgba(0,0,0,0.5)] top-0 left-0 z-20 ${showSidebar ? 'visible' : 'invisible'}`}>
+            <div className='hidden md-lg:block z-[9999]'>
+                <div onClick={() => setShowSidebar(false)} className={`fixed transition-all duration-200 hidden md-lg:block w-screen h-screen bg-[rgba(0,0,0,0.5)] top-0 left-0 ${showSidebar ? 'visible' : 'invisible'}`}>
                 </div>
                 <div className={`w-[300px] h-screen z-[9999] transition-all duration-200 fixed overflow-y-auto bg-white dark:bg-slate-900 dark:text-gray-300 py-6 px-8 top-0 ${!showSidebar ? '-left-[300px]' : 'left-0'}`}>
                     <div className='flex justify-start flex-col gap-6'>

@@ -1,7 +1,7 @@
 .slider{
-    width: 100vw; /* you can change width same*/
+    width: 100vw;
     max-width: 100vw;
-    height: 512px;
+    height: 400px;
     margin: auto;
     position: relative;
     overflow: hidden;
@@ -16,7 +16,7 @@
     transition: 1s;
 }
 .slider .list img{
-    width: 100vw; /* you can change width same*/
+    width: 100vw;
     max-width: 100vw;
     height: 100%;
     object-fit: cover;

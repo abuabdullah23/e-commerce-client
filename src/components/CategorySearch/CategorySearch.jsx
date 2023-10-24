@@ -15,7 +15,7 @@ const CategorySearch = () => {
     return (
         <>
             {/* 3rd section in header : category, search, support*/}
-            <div className='w-[85%] lg:w-[90%] mx-auto'>
+            <div className='w-[85%] lg:w-[90%] mx-auto mt-4'>
                 <div className='w-full flex flex-wrap md-lg:gap-8'>
                     <div className='w-3/12 md-lg:w-full'>
                         <div className='bg-white relative'>
@@ -26,7 +26,7 @@ const CategorySearch = () => {
                                 </div>
                                 <span className='pt-1'><MdOutlineKeyboardArrowDown /></span>
                             </div>
-                            <div className={`${categoryShow ? 'h-[400px]:' : 'h-0'} w-full overflow-hidden transition-all duration-1000 md-lg:relative absolute bg-white dark:bg-slate-950 border`}>
+                            <div className={`${categoryShow ? 'h-[400px]:' : 'h-0'} w-full overflow-hidden transition-all duration-500 md-lg:relative absolute bg-white dark:bg-slate-950 border z-[999]`}>
                                 <ul className='py-2 text-slate-700 dark:text-slate-200 font-medium'>
                                     {
                                         categories.map((category, i) => <Link
