@@ -19,7 +19,7 @@ const CustomSlider = () => {
     };
 
     useEffect(() => {
-        const refreshInterval = setInterval(next, 3000);
+        const refreshInterval = setInterval(next, 4000);
 
         return () => {
             clearInterval(refreshInterval);
