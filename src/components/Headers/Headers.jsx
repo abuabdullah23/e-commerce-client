@@ -38,7 +38,7 @@ const Headers = () => {
     }
 
     return (
-        <div className='w-full bg-white'>
+        <div className='w-full bg-white sticky top-0 z-[99999]'>
             {/* 1st navbar */}
             <div className='header-top bg-[#eeeeee] dark:bg-slate-800 transition-colors duration-300 md-lg:hidden'>
                 <div className='w-[85%] lg:w-[90%] mx-auto'>

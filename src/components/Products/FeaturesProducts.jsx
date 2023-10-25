@@ -7,7 +7,7 @@ const FeaturesProducts = () => {
     return (
         <div className='w-[85%] flex flex-wrap mx-auto my-12'>
             <div className="w-ful">
-                <div className='text-center flex flex-col justify-center items-center text-4xl text-slate-600 font-bold relative pb-[45px]'>
+                <div className='text-center flex flex-col justify-center items-center text-4xl text-slate-600 dark:text-gray-100 font-bold relative pb-[45px]'>
                     <h1>Feature Products</h1>
                     <div className='w-[100px] h-[4px] bg-[#7fad39] mt-4'></div>
                 </div>
@@ -31,7 +31,7 @@ const FeaturesProducts = () => {
                                 </div>
 
                                 {/* price and ratings */}
-                                <div className='py-3 px-2 text-slate-600 flex flex-col gap-1'>
+                                <div className='py-3 px-2 text-slate-600 dark:text-gray-100 flex flex-col gap-1'>
                                     <h2>Long Sleeve casual shirt for Man</h2>
                                     <div className='flex justify-start items-center gap-3'>
                                         <span className='text-base font-bold'>$324</span>

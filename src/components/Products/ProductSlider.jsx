@@ -32,7 +32,7 @@ const ProductSlider = ({ title }) => {
     const ButtonGroup = ({ next, previous }) => {
         return (
             <div className='flex items-center justify-between'>
-                <h2 className='text-lg font-semibold text-slate-600'>{title}</h2>
+                <h2 className='text-lg font-semibold text-slate-600 dark:text-gray-100'>{title}</h2>
                 <div className='flex justify-center items-center gap-3 text-slate-600'>
                     <button onClick={() => previous()} className='w-[30px] h-[30px] flex justify-center items-center bg-slate-300 hover:bg-slate-100 transition-all border border-slate-400'>
                         <span><FiChevronLeft /></span>
@@ -63,7 +63,7 @@ const ProductSlider = ({ title }) => {
                                 {
                                     product.map((p, i) => <Link className='flex justify-start items-start' key={i} to='#'>
                                         <img className='w-[110px] h-[110px]' src={`${import.meta.env.VITE_ClientSide_Url}/images/products/${p}.webp`} alt="slider image" />
-                                        <div className='px-3 flex justify-start items-start gap-1 flex-col text-slate-600'>
+                                        <div className='px-3 flex justify-start items-start gap-1 flex-col text-slate-600 dark:text-gray-100'>
                                             <h2>Long Sleeve casual shirt for Man</h2>
                                             <span className='text-base font-bold'>$944</span>
                                         </div>

@@ -26,7 +26,7 @@ const CategorySearch = () => {
                                 </div>
                                 <span className='pt-1'><MdOutlineKeyboardArrowDown /></span>
                             </div>
-                            <div className={`${categoryShow ? 'h-[400px]:' : 'h-0'} w-full overflow-hidden transition-all duration-500 md-lg:relative absolute bg-white dark:bg-slate-950 border z-[999]`}>
+                            <div className={`${categoryShow ? 'h-[400px]:' : 'h-0'} w-full overflow-hidden transition-all duration-500 md-lg:relative absolute bg-white dark:bg-slate-950 border z-[9999]`}>
                                 <ul className='py-2 text-slate-700 dark:text-slate-200 font-medium'>
                                     {
                                         categories.map((category, i) => <Link
