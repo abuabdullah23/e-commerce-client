@@ -3,6 +3,8 @@ import Headers from '../../components/Headers/Headers';
 import CategorySearch from '../../components/CategorySearch/CategorySearch';
 import Banner from '../../components/Banner/Banner';
 import Categories from '../../components/Categories/Categories';
+import FeaturesProducts from '../../components/Products/FeaturesProducts';
+import Products from '../../components/Products/Products';
 
 const Home = () => {
     return (
@@ -12,6 +14,8 @@ const Home = () => {
                 <CategorySearch />
                 <Banner />
                 <Categories />
+                <FeaturesProducts />
+                <Products />
             </div>
         </>
     );
