@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FaList } from 'react-icons/fa';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { Link } from 'react-router-dom';
-import categories from './Categories';
+import categories from '../../common/categories';
 import { IoIosCall } from 'react-icons/io';
 
 const CategorySearch = () => {

@@ -2,6 +2,7 @@ import React from 'react';
 import Headers from '../../components/Headers/Headers';
 import CategorySearch from '../../components/CategorySearch/CategorySearch';
 import Banner from '../../components/Banner/Banner';
+import Categories from '../../components/Categories/Categories';
 
 const Home = () => {
     return (
@@ -10,6 +11,7 @@ const Home = () => {
                 <Headers />
                 <CategorySearch />
                 <Banner />
+                <Categories />
             </div>
         </>
     );

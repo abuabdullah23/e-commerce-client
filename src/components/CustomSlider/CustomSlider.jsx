@@ -39,23 +39,28 @@ const CustomSlider = () => {
     };
 
     return (
-        <div className="slider">
-            <div className="list" style={sliderStyle}>
-                {items.map((src, index) => (
-                    <div key={index} className="item">
-                        <img src={src} alt="" />
+        <div className='overflow-hidden'>
+            <div className="slider">
+                <div className="list" style={sliderStyle}>
+                    {items.map((src, index) => (
+                        <div key={index} className="item">
+                            <img src={src} alt="" />
+                        </div>
+                    ))}
+                </div>
+                <div className='buttons-div'>
+                    <div className="buttons">
+                        <button id="prev" onClick={prev}>
+                            &lt;
+                        </button>
+                        <button id="next" onClick={next}>
+                            &gt;
+                        </button>
                     </div>
-                ))}
+                </div>
+
+                <ul className="dots">{dots}</ul>
             </div>
-            <div className="buttons">
-                <button id="prev" onClick={prev}>
-                    &lt;
-                </button>
-                <button id="next" onClick={next}>
-                    &gt;
-                </button>
-            </div>
-            <ul className="dots">{dots}</ul>
         </div>
     );
 };
