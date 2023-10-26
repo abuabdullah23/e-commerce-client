@@ -92,7 +92,7 @@ const Headers = () => {
             </div>
 
             {/* 2nd navbar */}
-            <div className='bg-white dark:bg-slate-950 transition-all duration-300'>
+            <div className='bg-gray-100 dark:bg-slate-950 transition-all duration-300'>
                 <div className='w-[85%] lg:w-[90%] mx-auto'>
                     <div className='h-[80px] md-lg:h-[75px] flex justify-between items-center flex-wrap'>
                         <div className='w-3/12 md-lg:w-full md-lg:pt-4'>
@@ -122,8 +122,9 @@ const Headers = () => {
                                     {
                                         navItems.map((item) => <li key={item.id} title={item.title}>
                                             <Link
+                                                to={item.path}
                                                 className={`p-2 block ${pathname === item.path ? 'text-[#9bcf4c]' : 'text-slate-600 dark:text-gray-300'}`}
-                                                to={item.path} >{item.title}</Link>
+                                            >{item.title}</Link>
                                         </li>)
                                     }
                                 </ul>
