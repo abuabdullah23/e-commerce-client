@@ -3,10 +3,18 @@ import categories from '../../../common/categories';
 import { Range } from 'react-range';
 import Ratings from '../../Ratings/Ratings';
 import ProductSlider from '../../Products/ProductSlider';
+import { BsFillGridFill } from 'react-icons/bs';
+import { FaThList } from 'react-icons/fa';
+import ShopProducts from '../ShopProducts/ShopProducts';
+import Pagination from '../../Pagination/Pagination';
 
 const AllProducts = () => {
     const [filter, setFilter] = useState(false);
     const [rangeState, setRangeState] = useState({ values: [50, 2000] })
+    const [styles, setStyles] = useState('grid');
+    const [pageNumber, setPageNumber] = useState(1);
+    const [perPage, setPerPage] = useState(5);
+    const [currentPage, setCurrentPage] = useState(1);
 
     return (
         <section className='py-16'>
@@ -54,7 +62,7 @@ const AllProducts = () => {
                         </div>
 
                         {/* show rating wise products */}
-                        <div className='py-2 flex flex-col gap-5'>
+                        <div className='py-2 flex flex-col gap-5 md:mb-8'>
                             <h2 className='text-3xl font-bold'>Rating</h2>
                             <div className='flex flex-col gap-3'>
                                 <div className='flex items-center gap-2'>
@@ -75,6 +83,47 @@ const AllProducts = () => {
                         {/* Latest Products */}
                         <div className='py-5 flex flex-col gap-4 md:hidden'>
                             <ProductSlider title='Latest Products' />
+                        </div>
+                    </div>
+
+                    {/* products section : main content */}
+                    <div className='w-9/12 md-lg:8/12 md:w-full'>
+                        <div className='pl-8 md:pl-0'>
+                            <div className='py-4 bg-white dark:bg-slate-900 mb-10 px-3 rounded-md flex justify-between items-start border dark:border-slate-500'>
+                                <h2 className='text-lg font-medium text-slate-600 dark:text-gray-100'>Products: {12}</h2>
+                                <div className='flex justify-center items-center gap-3'>
+                                    <select className='p-1 border dark:border-slate-600 outline-0 dark:bg-slate-950 text-slate-600 dark:text-gray-100 font-semibold' name='' id=''>
+                                        <option value="">Sort By</option>
+                                        <option value="">Low to High Price</option>
+                                        <option value="">High to Low Price</option>
+                                    </select>
+
+                                    {/* hidden md and sm device */}
+                                    <div className='flex justify-center items-start gap-4 md-lg:hidden'>
+                                        <div onClick={() => setStyles('grid')} className={`p-2 text-slate-600 dark:text-gray-100 hover:bg-slate-300 dark:hover:bg-slate-600 cursor-pointer rounded-sm ${styles === 'grid' && 'bg-slate-300 dark:bg-slate-600'}`}>
+                                            <BsFillGridFill />
+                                        </div>
+                                        <div onClick={() => setStyles('list')} className={`p-2 text-slate-600 dark:text-gray-100 hover:bg-slate-300 dark:hover:bg-slate-600 cursor-pointer rounded-sm ${styles === 'list' && 'bg-slate-300 dark:bg-slate-600'}`}>
+                                            <FaThList />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Products grid/list view */}
+                            <div className='pb-8'>
+                                <ShopProducts styles={styles} />
+                            </div>
+
+                            {/* pagination */}
+                            <div className='flex items-center justify-end'>
+                                <Pagination
+                                    pageNumber={pageNumber}
+                                    setPageNumber={setPageNumber}
+                                    totalItem={20}
+                                    perPage={perPage}
+                                    showItem={Math.floor(20 / 5)} />
+                            </div>
                         </div>
                     </div>
 
