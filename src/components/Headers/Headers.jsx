@@ -123,7 +123,7 @@ const Headers = () => {
                                         navItems.map((item) => <li key={item.id} title={item.title}>
                                             <Link
                                                 to={item.path}
-                                                className={`p-2 block ${pathname === item.path ? 'text-[#9bcf4c]' : 'text-slate-600 dark:text-gray-300'}`}
+                                                className={`p-2 block ${pathname === item.path ? 'text-[#9bcf4c] underline underline-offset-4' : 'text-slate-600 dark:text-gray-300'}`}
                                             >{item.title}</Link>
                                         </li>)
                                     }
@@ -138,12 +138,12 @@ const Headers = () => {
                                                 {wishlist}
                                             </div>
                                         </div>
-                                        <div title='Your cart' className='relative flex justify-center items-center cursor-pointer w-[35px] h-[35px] rounded-full bg-[#e2e2e2]'>
+                                        <Link to='/cart' title='Your cart' className='relative flex justify-center items-center cursor-pointer w-[35px] h-[35px] rounded-full bg-[#e2e2e2] hover:bg-slate-300'>
                                             <span className='text-xl text-orange-500'><AiFillShopping /></span>
                                             <div className='w-[20px] h-[20px] absolute -top-2 -right-[5px] bg-green-500 rounded-full text-white text-sm flex justify-center items-center'>
                                                 {cart}
                                             </div>
-                                        </div>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
