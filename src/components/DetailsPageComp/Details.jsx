@@ -8,6 +8,11 @@ import { AiFillGithub, AiFillHeart, AiOutlineTwitter } from 'react-icons/ai';
 import { FaFacebookF, FaLinkedinIn } from 'react-icons/fa';
 import { HiShoppingBag } from 'react-icons/hi2';
 import Reviews from '../Reviews/Reviews';
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
+import 'swiper/css/pagination'
+import { Pagination } from 'swiper/modules'
+
 
 const Details = () => {
     const [image, setImage] = useState('');
@@ -160,7 +165,7 @@ const Details = () => {
 
             {/* Review, add review, rating, shop products */}
             <section className='w-[85%] md:w-[80%] sm:w-[90%] lg:w-[90%] h-full mx-auto mb-16'>
-                <div className='flex md-lg:flex-wrap gap-4'>
+                <div className='flex md:flex-wrap gap-4'>
                     <div className='w-[72%] md-lg:w-full'>
                         <div className='grid grid-cols-2'>
                             <button onClick={() => setState('reviews')} className={`py-1 px-5 hover:text-white hover:bg-green-500 ${state === 'reviews' ? 'bg-green-500 text-white' : 'bg-slate-200 text-slate-700'}`}>Reviews</button>
@@ -196,6 +201,63 @@ const Details = () => {
                 </div>
             </section>
 
+            {/* Related Products */}
+            <section className='w-[85%] md:w-[80%] sm:w-[90%] lg:w-[90%] h-full mx-auto mb-16'>
+                <h2 className='text-2xl font-semibold py-8 text-slate-600 dark:text-gray-100'>Related Products</h2>
+                <div>
+                    <Swiper
+                        slidesPerView='auto'
+                        breakpoints={{
+                            1280: {
+                                slidesPerView: 4
+                            },
+                            565: {
+                                slidesPerView: 3
+                            },
+                            340: {
+                                slidesPerView: 2
+                            },
+                        }}
+                        spaceBetween={25}
+                        loop={true}
+                        pagination={{
+                            clickable: true,
+                            el: '.custom_bullet'
+                        }}
+                        modules={[Pagination]}
+                        className='mySwipper'
+                    >
+                        {
+                            [1, 2, 3, 4, 5, 6, 7].map((p, i) => <SwiperSlide key={i}>
+                                <Link>
+                                    <div className='relative h-[270px]'>
+                                        <div className='flex justify-center items-center absolute left-2 top-2 text-white w-[38px] h-[38px] rounded-full bg-red-500 text-xs font-semibold'>6%</div>
+                                        <div className='w-full h-full '>
+                                            <img className='object-cover w-full h-full' src={`${import.meta.env.VITE_ClientSide_Url}/images/products/${p}.webp`} alt="product image" />
+                                            <div className='absolute top-0 left-0 w-full h-full bg-[#000] opacity-25 hover:opacity-50 transition-all duration-500'>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className='p-4 flex flex-col gap-1'>
+                                        <h2 className='dark:text-gray-100 text-lg'>Long Sleeve casual shirt
+                                            for Man</h2>
+                                        <div className='flex justify-start items-center gap-3'>
+                                            <h2 className='text-[#6699ff] dark:text-green-500 text-lg font-bold'>$454</h2>
+                                            <div className='flex items-center gap-1 text-lg'>
+                                                <Ratings ratings={4.5} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Link>
+                            </SwiperSlide>)
+                        }
+                    </Swiper>
+                </div>
+                <div className='w-full flex justify-center items-center py-10'>
+                    <div className='custom_bullet justify-center gap-3 !w-auto'></div>
+                </div>
+            </section >
+            
         </div>
     );
 };
