@@ -43,9 +43,9 @@ const AllCarts = () => {
                                                             </div>
                                                             <div className='flex flex-col gap-2'>
                                                                 <div className='flex bg-slate-200 dark:bg-slate-600 dark:text-white h-[30px] justify-center items-center text-xl'>
-                                                                    <div className='px-3 cursor-pointer hover:bg-slate-300 dark:hover:bg-slate-700'>-</div>
-                                                                    <div className='px-3'>3</div>
-                                                                    <div className='px-3 cursor-pointer hover:bg-slate-300 dark:hover:bg-slate-700'>+</div>
+                                                                    <div className='px-3 select-none h-full cursor-pointer hover:bg-slate-300 dark:hover:bg-slate-700'>-</div>
+                                                                    <div className='px-3 select-none'>3</div>
+                                                                    <div className='px-3 select-none h-full cursor-pointer hover:bg-slate-300 dark:hover:bg-slate-700'>+</div>
                                                                 </div>
                                                                 <button className='py-1 px-2 bg-red-500 dark:bg-orange-600 dark:hover:bg-orange-700 hover:bg-red-600 text-white flex items-center justify-center gap-2'>
                                                                     <FaTrashAlt />

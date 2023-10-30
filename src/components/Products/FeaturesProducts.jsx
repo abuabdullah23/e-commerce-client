@@ -2,6 +2,7 @@ import React from 'react';
 import { AiFillHeart, AiOutlineShoppingCart } from 'react-icons/ai';
 import { FaEye } from 'react-icons/fa';
 import Ratings from '../Ratings/Ratings';
+import { Link } from 'react-router-dom';
 
 const FeaturesProducts = () => {
     return (
@@ -24,7 +25,7 @@ const FeaturesProducts = () => {
 
                                     <ul className='flex justify-center items-center gap-2 transition-all duration-500 absolute -bottom-10 group-hover:bottom-3 w-full'>
                                         <li className='w-[38px] h-[38px] rounded-full cursor-pointer flex justify-center items-center bg-gray-100 hover:bg-[#7fad39] hover:text-white hover:rotate-[360deg] transition-all duration-500'><AiFillHeart /></li>
-                                        <li className='w-[38px] h-[38px] rounded-full cursor-pointer flex justify-center items-center bg-gray-100 hover:bg-[#7fad39] hover:text-white hover:rotate-[360deg] transition-all duration-500'><FaEye /></li>
+                                        <Link to={`/details/dssldfj`} className='w-[38px] h-[38px] rounded-full cursor-pointer flex justify-center items-center bg-gray-100 hover:bg-[#7fad39] hover:text-white hover:rotate-[360deg] transition-all duration-500'><FaEye /></Link>
                                         <li className='w-[38px] h-[38px] rounded-full cursor-pointer flex justify-center items-center bg-gray-100 hover:bg-[#7fad39] hover:text-white hover:rotate-[360deg] transition-all duration-500'><AiOutlineShoppingCart /></li>
                                     </ul>
 
