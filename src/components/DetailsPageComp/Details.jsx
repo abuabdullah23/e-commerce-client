@@ -187,7 +187,7 @@ const Details = () => {
                             {
                                 [1, 2, 3].map((p, i) => <Link key={i}>
                                     <div className='relative'>
-                                        <div className='flex justify-center items-center absolute left-2 top-2 text-white w-[38px] h-[38px] rounded-full bg-red-500 text-xs font-semibold'>6%</div>
+                                        <div className='flex justify-center items-center absolute left-4 top-4 text-white w-[38px] h-[38px] rounded-full bg-red-500 text-xs font-semibold'>6%</div>
                                         <img className='object-cover w-full h-full' src={`${import.meta.env.VITE_ClientSide_Url}/images/products/${p}.webp`} alt="product image" />
                                     </div>
                                     <h2 className='dark:text-gray-100'>Long Sleeve casual shirt for Man</h2>
@@ -257,7 +257,7 @@ const Details = () => {
                     <div className='custom_bullet justify-center gap-3 !w-auto'></div>
                 </div>
             </section >
-            
+
         </div>
     );
 };
