@@ -4,9 +4,24 @@ import Headers from '../../components/Headers/Headers';
 import SocialLogin from '../../components/SocialLogin/SocialLogin';
 import { Link } from 'react-router-dom';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
+import Loader from '../../components/Loader/Loader';
 
 const Login = () => {
     const [seePass, setSeePass] = useState(false);
+    const loader = false;
+
+    // handle login form value
+    const handleLogin = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        const loginData = {
+            email,
+            password,
+        }
+        console.log(loginData);
+    }
 
     return (
         <div>
@@ -17,7 +32,7 @@ const Login = () => {
                         <div className='p-8 sm:p-3'>
                             <h2 className='text-center w-full text-xl text-slate-600 dark:text-gray-100 font-bold'>Login</h2>
                             <div>
-                                <form className='text-slate-600 dark:text-gray-100'>
+                                <form onSubmit={handleLogin} className='text-slate-600 dark:text-gray-100'>
                                     <div className='flex flex-col gap-1 mb-2'>
                                         <label htmlFor="email">Email</label>
                                         <input required type="email" className='w-full px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md dark:text-slate-600' id='email' name='email' placeholder='email' />
@@ -38,8 +53,18 @@ const Login = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <button className='px-8 w-full py-2 bg-purple-500 shadow-lg hover:shadow-indigo-500/30 text-white rounded-md'>Login</button>
+                                    
+                                    {/* submit button */}
+                                    <button
+                                        disabled={loader ? true : false}
+                                        type="submit"
+                                        className={`px-8 w-full py-2 bg-purple-500 shadow-lg hover:shadow-indigo-500/30 text-white rounded-md ${loader && 'bg-purple-400'} `}>
+                                        {
+                                            loader ? <Loader loadingText={'Logging in'} /> : 'Login'
+                                        }
+                                    </button>
                                 </form>
+
                                 <SocialLogin />
                             </div>
                             <div className='text-center text-slate-600 dark:text-gray-100 pt-1'>

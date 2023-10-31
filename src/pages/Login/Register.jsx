@@ -4,9 +4,26 @@ import Footer from '../../components/Footer/Footer';
 import SocialLogin from '../../components/SocialLogin/SocialLogin';
 import { Link } from 'react-router-dom';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
+import Loader from '../../components/Loader/Loader';
 
 const Register = () => {
     const [seePass, setSeePass] = useState(false);
+    const loader = false;
+
+    // handle registration form value
+    const handleRegister = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const name = form.name.value;
+        const password = form.password.value;
+        const registerData = {
+            email,
+            name,
+            password,
+        }
+        console.log(registerData);
+    }
 
     return (
         <div>
@@ -17,7 +34,7 @@ const Register = () => {
                         <div className='p-8 sm:p-3'>
                             <h2 className='text-center w-full text-xl text-slate-600 dark:text-gray-100 font-bold'>Register</h2>
                             <div>
-                                <form className='text-slate-600 dark:text-gray-100'>
+                                <form onSubmit={handleRegister} className='text-slate-600 dark:text-gray-100'>
                                     <div className='flex flex-col gap-1 mb-2'>
                                         <label htmlFor="name">Name</label>
                                         <input required type="text" className='w-full px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md dark:text-slate-600' id='name' name='name' placeholder='name' />
@@ -42,7 +59,15 @@ const Register = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <button type='submit' className='px-8 w-full py-2 bg-purple-500 shadow-lg hover:shadow-indigo-500/30 text-white rounded-md'>Register</button>
+                                    {/* submit button */}
+                                    <button
+                                        disabled={loader ? true : false}
+                                        type="submit"
+                                        className={`px-8 w-full py-2 bg-purple-500 shadow-lg hover:shadow-indigo-500/30 text-white rounded-md ${loader && 'bg-purple-400'} `}>
+                                        {
+                                            loader ? <Loader loadingText={'Processing'} /> : 'Register'
+                                        }
+                                    </button>
                                 </form>
                                 <div>
                                     <SocialLogin />
