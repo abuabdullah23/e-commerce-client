@@ -1,10 +1,22 @@
 import React from 'react';
 import { FaTrashAlt } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const AllCarts = () => {
     const cartProducts = [1, 2, 3]
     const outOfStockProduct = [1, 2]
+    const navigate = useNavigate();
+
+    const handleShipping = () => {
+        navigate('/shipping', {
+            state: {
+                products: [],
+                price: 500,
+                shipping_fee: 45,
+                items: 4
+            }
+        })
+    }
 
     return (
         <section className='bg-[#eeeeee] dark:bg-slate-800 transition-colors duration-300'>
@@ -124,7 +136,7 @@ const AllCarts = () => {
                                                 <span>Total</span>
                                                 <span className='text-lg font-semibold text-orange-500'>$943</span>
                                             </div>
-                                            <button className='px-5 py-[6px] rounded-sm hover:shadow-orange-500/20 hover:shadow-lg bg-orange-500 text-sm text-white uppercase'>Proceed to Checkout - 4</button>
+                                            <button onClick={handleShipping} className='px-5 py-[6px] rounded-sm hover:shadow-orange-500/20 hover:shadow-lg bg-orange-500 text-sm text-white uppercase'>Proceed to Checkout - 4</button>
                                         </div>
                                     }
                                 </div>

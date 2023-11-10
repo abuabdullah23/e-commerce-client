@@ -192,6 +192,24 @@ const Headers = () => {
                                 </li>)
                             }
                         </ul>
+
+                        {/* cart and wishlist */}
+                        <div className='flex justify-start items-center gap-5'>
+                            <div className='flex justify-center gap-5'>
+                                <div onClick={()=> setShowSidebar(false)} title='Your wishlist' className='relative flex justify-center items-center cursor-pointer w-[35px] h-[35px] rounded-full bg-[#e2e2e2]'>
+                                    <span className='text-xl text-red-500'><AiFillHeart /></span>
+                                    <div className='w-[20px] h-[20px] absolute -top-2 -right-[5px] bg-green-500 rounded-full text-white text-sm flex justify-center items-center'>
+                                        {wishlist}
+                                    </div>
+                                </div>
+                                <Link onClick={()=> setShowSidebar(false)} to='/cart' title='Your cart' className='relative flex justify-center items-center cursor-pointer w-[35px] h-[35px] rounded-full bg-[#e2e2e2] hover:bg-slate-300'>
+                                    <span className='text-xl text-orange-500'><AiFillShopping /></span>
+                                    <div className='w-[20px] h-[20px] absolute -top-2 -right-[5px] bg-green-500 rounded-full text-white text-sm flex justify-center items-center'>
+                                        {cart}
+                                    </div>
+                                </Link>
+                            </div>
+                        </div>
                         <div className='flex justify-start items-center gap-4'>
                             <a href="#" title='facebook'> <FaFacebookF /> </a>
                             <a href="#" title='twitter'> <AiOutlineTwitter /> </a>
