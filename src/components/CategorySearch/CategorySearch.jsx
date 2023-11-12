@@ -2,14 +2,13 @@ import { useState } from 'react';
 import { FaList } from 'react-icons/fa';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { Link } from 'react-router-dom';
-import categories from '../../common/categories';
 import { IoIosCall } from 'react-icons/io';
 
-const CategorySearch = () => {
+const CategorySearch = ({ categories }) => {
     const [categoryShow, setCategoryShow] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const [category, setCategory] = useState('');
-    // console.log(searchValue, category);
+
 
 
     return (
@@ -26,15 +25,16 @@ const CategorySearch = () => {
                                 </div>
                                 <span className='pt-1'><MdOutlineKeyboardArrowDown /></span>
                             </div>
-                            <div className={`${categoryShow ? 'h-[400px]:' : 'h-0'} w-full overflow-hidden transition-all duration-500 md-lg:relative absolute bg-white dark:bg-slate-950 border z-[9999]`}>
-                                <ul className='py-2 text-slate-700 dark:text-slate-200 font-medium'>
+                            <div className={`${categoryShow ? 'h-[400px]' : 'h-0'} w-full overflow-hidden transition-all duration-500 md-lg:relative absolute bg-white dark:bg-slate-950 border border-slate-400 z-[9999]`}>
+                                <ul className='py-2 text-slate-700 h-full overflow-auto dark:text-slate-200 font-medium'>
                                     {
                                         categories.map((category, i) => <Link
-                                            key={i}
-                                            to={`product/${category}`}
+                                            key={category._id}
+                                            to={`product/${category.slug}`}
                                             onClick={() => setCategoryShow(false)}
                                             className='flex justify-start items-center gap-2 px-[24px] py-[6px] hover:bg-slate-300 dark:hover:bg-slate-700 cursor-pointer transition-all duration-500'>
-                                            <span >{category}</span>
+                                            <img src={category.image} alt={category.name} className='w-[30px] h-[30px] rounded-full overflow-hidden' />
+                                            <span >{category.name}</span>
                                         </Link>)
                                     }
                                 </ul>
@@ -50,8 +50,8 @@ const CategorySearch = () => {
                                     <div className='relative after:absolute after:h-[25px] after:w-[1px] after:bg-[#afafaf] after:-right-[15px] md:hidden'>
                                         <select onChange={(e) => setCategory(e.target.value)} className='w-[150px] text-slate-600 dark:text-slate-100 font-semibold bg-transparent dark:bg-slate-800 px-2 h-full outline-0 border-none' name="" id="">
                                             <option value="">Select category</option>
-                                            {categories.map((category, i) => <option value={category} key={i}>
-                                                {category}
+                                            {categories.map((category, i) => <option value={category.name} key={i}>
+                                                {category.name}
                                             </option>)}
                                         </select>
                                     </div>
