@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import categories from '../../../common/categories';
+import React, { useEffect, useState } from 'react';
 import { Range } from 'react-range';
 import Ratings from '../../Ratings/Ratings';
 import ProductSlider from '../../Products/ProductSlider';
@@ -7,14 +6,31 @@ import { BsFillGridFill } from 'react-icons/bs';
 import { FaThList } from 'react-icons/fa';
 import ShopProducts from '../ShopProducts/ShopProducts';
 import Pagination from '../../Pagination/Pagination';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPriceRangeProducts } from '../../../redux/reducers/home/homeReducers';
 
 const AllProducts = () => {
     const [filter, setFilter] = useState(false);
-    const [rangeState, setRangeState] = useState({ values: [50, 2000] })
+    const [rangeState, setRangeState] = useState({ values: [1, 100] })
     const [styles, setStyles] = useState('grid');
     const [pageNumber, setPageNumber] = useState(1);
     const [perPage, setPerPage] = useState(5);
     const [currentPage, setCurrentPage] = useState(1);
+    const dispatch = useDispatch();
+    const { categories, products, latestProducts, priceRange } = useSelector(state => state.home)
+
+    // get price range products
+    useEffect(() => {
+        dispatch(getPriceRangeProducts());
+    }, [])
+
+    // set range
+    useEffect(() => {
+        setRangeState({
+            values: [priceRange.low, priceRange.high]
+        })
+    }, [priceRange])
+
 
     return (
         <section className='py-16'>
@@ -31,8 +47,8 @@ const AllProducts = () => {
                             <div className='py-2'>
                                 {
                                     categories.map((c, i) => <div key={i} className='flex justify-start items-center gap-2 py-1'>
-                                        <input type="checkbox" name="" id={c} />
-                                        <label className='block cursor-pointer' htmlFor={c}>{c}</label>
+                                        <input type="checkbox" name="" id={c.name} />
+                                        <label className='block cursor-pointer' htmlFor={c.name}>{c.name}</label>
                                     </div>)
                                 }
                             </div>
@@ -43,8 +59,8 @@ const AllProducts = () => {
                             <h2 className='text-3xl font-bold'>Price</h2>
                             <Range
                                 step={5}
-                                min={50}
-                                max={2000}
+                                min={priceRange.Low}
+                                max={priceRange.high}
                                 values={rangeState.values}
                                 onChange={(values) => setRangeState({ values })}
                                 renderTrack={({ props, children }) => (
@@ -82,7 +98,7 @@ const AllProducts = () => {
 
                         {/* Latest Products */}
                         <div className='py-5 flex flex-col gap-4 md:hidden'>
-                            {/* <ProductSlider title='Latest Products' /> */}
+                            <ProductSlider title='Latest Products' products={latestProducts} />
                         </div>
                     </div>
 
