@@ -82,7 +82,7 @@ const AllProducts = () => {
 
                         {/* Latest Products */}
                         <div className='py-5 flex flex-col gap-4 md:hidden'>
-                            <ProductSlider title='Latest Products' />
+                            {/* <ProductSlider title='Latest Products' /> */}
                         </div>
                     </div>
 

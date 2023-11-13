@@ -1,6 +1,5 @@
 import homeReducers from "./home/homeReducers";
 
-
 const rootReducers = {
     home : homeReducers
 }

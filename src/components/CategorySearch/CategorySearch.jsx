@@ -1,15 +1,22 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaList } from 'react-icons/fa';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { IoIosCall } from 'react-icons/io';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCategories } from '../../redux/reducers/home/homeReducers';
 
-const CategorySearch = ({ categories }) => {
+const CategorySearch = () => {
     const [categoryShow, setCategoryShow] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const [category, setCategory] = useState('');
+    const dispatch = useDispatch();
+    const { categories } = useSelector(state => state.home)
 
-
+    // get categories and products
+    useEffect(() => {
+        dispatch(getCategories())
+    }, [])
 
     return (
         <>

@@ -4,11 +4,11 @@ import 'react-multi-carousel/lib/styles.css';
 import { Link } from 'react-router-dom';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 
-const ProductSlider = ({ title }) => {
-    const products = [
-        [1, 2, 3],
-        [4, 5, 6]
-    ]
+const ProductSlider = ({ title, products }) => {
+    // const products = [
+    //     [1, 2, 3],
+    //     [4, 5, 6]
+    // ]
 
     const responsive = {
         superLargeDesktop: {
@@ -61,11 +61,15 @@ const ProductSlider = ({ title }) => {
                         return (
                             <div key={index} className='flex flex-col justify-start gap-2'>
                                 {
-                                    product.map((p, i) => <Link className='flex justify-start items-start' key={i} to='#'>
-                                        <img className='w-[110px] h-[110px]' src={`${import.meta.env.VITE_ClientSide_Url}/images/products/${p}.webp`} alt="slider image" />
-                                        <div className='px-3 flex justify-start items-start gap-1 flex-col text-slate-600 dark:text-gray-100'>
-                                            <h2>Long Sleeve casual shirt for Man</h2>
-                                            <span className='text-base font-bold'>$944</span>
+                                    product.map((p, i) => <Link
+                                        to={`/details/${p._id}`}
+                                        className='flex justify-start items-start w-full' key={i}>
+                                        <div className='w-1/3 h-[110px]'>
+                                            <img className='w-full h-full object-cover border' src={p?.images?.[0]} alt="slider image" />
+                                        </div>
+                                        <div className='w-2/3 px-3 flex justify-start items-start gap-1 flex-col text-slate-600 dark:text-gray-100'>
+                                            <h2>{p?.name.slice(0, 60)}...</h2>
+                                            <span className='text-base font-bold'>${p?.price}</span>
                                         </div>
                                     </Link>)
                                 }
