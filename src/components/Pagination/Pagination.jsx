@@ -25,7 +25,7 @@ const Pagination = ({ pageNumber, setPageNumber, totalItem, perPage, showItem })
                     key={i}
                     onClick={() => setPageNumber(i)}
                     className={`
-                    ${pageNumber === i ? 'bg-slate-500 shadow-lg shadow-slate-500/50 text-white' : 'bg-slate-300 hover:bg-slate-500 shadow-lg hover:shadow-slate-500/50 text-slate-800 hover:text-white'} w-8 h-8 rounded-full flex justify-center items-center cursor-pointer`
+                    ${pageNumber === i ? 'bg-slate-950 shadow-lg shadow-slate-500/50 text-white' : 'bg-slate-300 hover:bg-slate-500 shadow-lg hover:shadow-slate-500/50 text-slate-800 hover:text-white'} w-8 h-8 rounded-full flex justify-center items-center cursor-pointer`
                     }>
                     {i}
                 </li>

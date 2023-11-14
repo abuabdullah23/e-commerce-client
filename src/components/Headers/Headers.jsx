@@ -123,7 +123,7 @@ const Headers = () => {
                                         navItems.map((item) => <li key={item.id} title={item.title}>
                                             <Link
                                                 to={item.path}
-                                                className={`p-2 block ${pathname === item.path ? 'text-[#9bcf4c] underline underline-offset-4' : 'text-slate-600 dark:text-gray-300'}`}
+                                                className={`p-2 block ${pathname === item.path ? 'text-[#9bcf4c] underline underline-offset-4 decoration-2' : 'text-slate-600 dark:text-gray-300'}`}
                                             >{item.title}</Link>
                                         </li>)
                                     }
@@ -188,7 +188,7 @@ const Headers = () => {
                                 navItems.map(item => <li key={item.id}>
                                     <Link
                                         onClick={() => setShowSidebar(false)}
-                                        className={`block ${pathname === item.path ? 'text-[#7fad39]' : 'text-slate-600 dark:text-gray-300'} hover:pl-1 transition-all duration-300`}
+                                        className={`block ${pathname === item.path ? 'text-[#9bcf4c] underline underline-offset-4 decoration-2' : 'text-slate-600 dark:text-gray-300'} hover:pl-1 transition-all duration-300`}
                                         to={item.path} >{item.title}</Link>
                                 </li>)
                             }

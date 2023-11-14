@@ -7,17 +7,18 @@ import { FaThList } from 'react-icons/fa';
 import ShopProducts from '../ShopProducts/ShopProducts';
 import Pagination from '../../Pagination/Pagination';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPriceRangeProducts } from '../../../redux/reducers/home/homeReducers';
+import { getPriceRangeProducts, getQueryProducts } from '../../../redux/reducers/home/homeReducers';
 
 const AllProducts = () => {
+    const dispatch = useDispatch();
+    const { categories, products, totalProducts, latestProducts, priceRange, perPage } = useSelector(state => state.home)
     const [filter, setFilter] = useState(false);
-    const [rangeState, setRangeState] = useState({ values: [1, 100] })
+    const [rangeState, setRangeState] = useState({ values: [0, 100] })
+    const [ratingRange, setRatingRange] = useState('');
+    const [category, setCategory] = useState('');
+    const [sortPrice, setSortPrice] = useState('');
     const [styles, setStyles] = useState('grid');
     const [pageNumber, setPageNumber] = useState(1);
-    const [perPage, setPerPage] = useState(5);
-    const [currentPage, setCurrentPage] = useState(1);
-    const dispatch = useDispatch();
-    const { categories, products, latestProducts, priceRange } = useSelector(state => state.home)
 
     // get price range products
     useEffect(() => {
@@ -31,6 +32,34 @@ const AllProducts = () => {
         })
     }, [priceRange])
 
+    // query category for search by category
+    const queryCategory = (e, value) => {
+        if (e.target.checked) {
+            setCategory(value)
+        } else {
+            setCategory('')
+        }
+    }
+
+    // query products
+    useEffect(() => {
+        dispatch(
+            getQueryProducts({
+                low: rangeState.values[0],
+                high: rangeState.values[1],
+                category,
+                ratingRange,
+                pageNumber,
+                sortPrice
+            }))
+    }, [
+        rangeState.values[0],
+        rangeState.values[1],
+        category,
+        ratingRange,
+        pageNumber,
+        sortPrice
+    ])
 
     return (
         <section className='py-16'>
@@ -47,7 +76,7 @@ const AllProducts = () => {
                             <div className='py-2'>
                                 {
                                     categories.map((c, i) => <div key={i} className='flex justify-start items-center gap-2 py-1'>
-                                        <input type="checkbox" name="" id={c.name} />
+                                        <input checked={category === c.name ? true : false} onChange={(e) => queryCategory(e, c.name)} type="checkbox" name="" id={c.name} />
                                         <label className='block cursor-pointer' htmlFor={c.name}>{c.name}</label>
                                     </div>)
                                 }
@@ -80,19 +109,11 @@ const AllProducts = () => {
                         {/* show rating wise products */}
                         <div className='py-2 flex flex-col gap-5 md:mb-8'>
                             <h2 className='text-3xl font-bold'>Rating</h2>
-                            <div className='flex flex-col gap-3'>
-                                <div className='flex items-center gap-2'>
-                                    <Ratings ratings={5} /> </div>
-                                <div className='flex items-center gap-2'>
-                                    <Ratings ratings={4} /> </div>
-                                <div className='flex items-center gap-2'>
-                                    <Ratings ratings={3} /> </div>
-                                <div className='flex items-center gap-2'>
-                                    <Ratings ratings={2} /> </div>
-                                <div className='flex items-center gap-2'>
-                                    <Ratings ratings={1} /> </div>
-                                <div className='flex items-center gap-2'>
-                                    <Ratings ratings={0} /> </div>
+                            <div className='flex flex-col gap-1'>
+                                {
+                                    [5, 4, 3, 2, 1, ''].map((r, i) => <div key={i} onClick={() => setRatingRange(r)} className={`flex items-center gap-2 cursor-pointer hover:bg-slate-300 dark:hover:bg-slate-950 w-fit p-1 rounded transition-all duration-200 ${ratingRange === r ? 'border border-slate-500 dark:bg-slate-950' : ''}`} >
+                                        <Ratings ratings={r} /> </div>)
+                                }
                             </div>
                         </div>
 
@@ -106,12 +127,12 @@ const AllProducts = () => {
                     <div className='w-9/12 md-lg:8/12 md:w-full'>
                         <div className='pl-8 md:pl-0'>
                             <div className='py-4 bg-white dark:bg-slate-900 mb-10 px-3 rounded-md flex justify-between items-start border dark:border-slate-500'>
-                                <h2 className='text-lg font-medium text-slate-600 dark:text-gray-100'>Products: {12}</h2>
+                                <h2 className='text-lg font-medium text-slate-600 dark:text-gray-100'>Products: {totalProducts}</h2>
                                 <div className='flex justify-center items-center gap-3'>
-                                    <select className='p-1 border dark:border-slate-600 outline-0 dark:bg-slate-950 text-slate-600 dark:text-gray-100 font-semibold' name='' id=''>
+                                    <select onChange={(e) => setSortPrice(e.target.value)} className='p-1 border dark:border-slate-600 outline-0 dark:bg-slate-950 text-slate-600 dark:text-gray-100 font-semibold' name='' id=''>
                                         <option value="">Sort By</option>
-                                        <option value="">Low to High Price</option>
-                                        <option value="">High to Low Price</option>
+                                        <option value="low-to-high">Low to High Price</option>
+                                        <option value="high-to-low">High to Low Price</option>
                                     </select>
 
                                     {/* hidden md and sm device */}
@@ -128,17 +149,19 @@ const AllProducts = () => {
 
                             {/* Products grid/list view */}
                             <div className='pb-8'>
-                                <ShopProducts styles={styles} />
+                                <ShopProducts products={products} styles={styles} />
                             </div>
 
                             {/* pagination */}
                             <div className='flex items-center justify-end'>
-                                <Pagination
-                                    pageNumber={pageNumber}
-                                    setPageNumber={setPageNumber}
-                                    totalItem={20}
-                                    perPage={perPage}
-                                    showItem={Math.floor(20 / 5)} />
+                                {
+                                    totalProducts > perPage && <Pagination
+                                        pageNumber={pageNumber}
+                                        setPageNumber={setPageNumber}
+                                        totalItem={totalProducts}
+                                        perPage={perPage}
+                                        showItem={(Math.floor(totalProducts / perPage)) + 2} />
+                                }
                             </div>
                         </div>
                     </div>

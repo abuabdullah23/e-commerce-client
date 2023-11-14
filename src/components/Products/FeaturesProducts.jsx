@@ -18,7 +18,7 @@ const FeaturesProducts = ({ products }) => {
                             <div key={i} className='border group transition-all duration-500 hover:shadow-md hover:-mt-2'>
                                 <div className='relative overflow-hidden'>
                                     {
-                                        p?.discount && <div className='flex justify-center items-center absolute left-2 top-2 text-white w-[38px] h-[38px] rounded-full bg-red-500 text-xs font-semibold'>{p.discount}%</div>
+                                        p?.discount ? <div className='flex justify-center items-center absolute left-2 top-2 text-white w-[38px] h-[38px] rounded-full bg-red-500 text-xs font-semibold'>{p.discount}%</div> : ''
                                     }
 
                                     <div className='h-[240px] w-full'>
