@@ -37,7 +37,7 @@ const CategorySearch = () => {
                                     {
                                         categories.map((category, i) => <Link
                                             key={category._id}
-                                            to={`product/${category.slug}`}
+                                            to={`/products?category=${category.name}`}
                                             onClick={() => setCategoryShow(false)}
                                             className='flex justify-start items-center gap-2 px-[24px] py-[6px] hover:bg-slate-300 dark:hover:bg-slate-700 cursor-pointer transition-all duration-500'>
                                             <img src={category.image} alt={category.name} className='w-[30px] h-[30px] rounded-full overflow-hidden' />
