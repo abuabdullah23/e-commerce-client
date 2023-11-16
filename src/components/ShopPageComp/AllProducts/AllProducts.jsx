@@ -14,7 +14,7 @@ const AllProducts = () => {
     const dispatch = useDispatch();
     const { categories, products, totalProducts, latestProducts, priceRange, perPage } = useSelector(state => state.home)
     const [filter, setFilter] = useState(false);
-    const [rangeState, setRangeState] = useState({ values: [0, 100] })
+    const [rangeState, setRangeState] = useState({ values: [priceRange.low, priceRange.high] });
     const [ratingRange, setRatingRange] = useState('');
     const [category, setCategory] = useState('');
     const [sortPrice, setSortPrice] = useState('');

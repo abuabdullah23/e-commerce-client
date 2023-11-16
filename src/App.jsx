@@ -7,6 +7,7 @@ import Login from "./pages/Login/Login"
 import Register from "./pages/Login/Register"
 import Shipping from "./pages/Shipping/Shipping"
 import CategoryShop from "./pages/CategoryShop/CategoryShop"
+import SearchProducts from "./pages/SearchProducts/SearchProducts"
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/products?" element={<CategoryShop />} />
+        <Route path="/products/search?" element={<SearchProducts />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/details/:slug" element={<ProductDetails />} />
         <Route path="/shipping" element={<Shipping />} />

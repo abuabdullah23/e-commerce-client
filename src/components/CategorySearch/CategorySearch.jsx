@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { FaList } from 'react-icons/fa';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { IoIosCall } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCategories } from '../../redux/reducers/home/homeReducers';
@@ -10,6 +10,7 @@ const CategorySearch = () => {
     const [categoryShow, setCategoryShow] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const [category, setCategory] = useState('');
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const { categories } = useSelector(state => state.home)
 
@@ -17,6 +18,13 @@ const CategorySearch = () => {
     useEffect(() => {
         dispatch(getCategories())
     }, [])
+
+    // search method functionality
+    const search = () => {
+        console.log(category);
+        console.log(searchValue);
+        navigate(`/products/search?category=${category}&value=${searchValue}`)
+    }
 
     return (
         <>
@@ -66,7 +74,7 @@ const CategorySearch = () => {
                                     {/* search box */}
                                     <input onChange={(e) => setSearchValue(e.target.value)} className='w-full h-full relative bg-transparent text-slate-500 dark:text-slate-100 outline-0 px-3' type="text" placeholder='what do you need?' />
 
-                                    <button className='bg-violet-500 hover:bg-violet-600 absolute right-0 px-8 h-full font-semibold uppercase text-white'>Search</button>
+                                    <button onClick={search} className='bg-violet-500 hover:bg-violet-600 absolute right-0 px-8 h-full font-semibold uppercase text-white'>Search</button>
                                 </div>
                             </div>
 

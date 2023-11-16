@@ -14,18 +14,20 @@ import { getPriceRangeProducts, getQueryProducts } from '../../redux/reducers/ho
 import { useSearchParams } from 'react-router-dom';
 import Footer from '../../components/Footer/Footer';
 
-const CategoryShop = () => {
+const SearchProducts = () => {
 
     const dispatch = useDispatch();
     const { products, totalProducts, latestProducts, priceRange, perPage } = useSelector(state => state.home)
     const [filter, setFilter] = useState(false);
     let [searchParams, setSearchParams] = useSearchParams();
     const category = searchParams.get('category');
+    const searchValue = searchParams.get('value');
     const [rangeState, setRangeState] = useState({ values: [priceRange.low, priceRange.high] })
     const [ratingRange, setRatingRange] = useState('');
     const [sortPrice, setSortPrice] = useState('');
     const [styles, setStyles] = useState('grid');
     const [pageNumber, setPageNumber] = useState(1);
+
 
     // get price range products
     useEffect(() => {
@@ -49,7 +51,8 @@ const CategoryShop = () => {
                 category,
                 ratingRange,
                 pageNumber,
-                sortPrice
+                sortPrice,
+                searchValue
             }))
     }, [
         rangeState.values[0],
@@ -57,7 +60,8 @@ const CategoryShop = () => {
         category,
         ratingRange,
         pageNumber,
-        sortPrice
+        sortPrice,
+        searchValue
     ])
 
     return (
@@ -166,4 +170,4 @@ const CategoryShop = () => {
     );
 };
 
-export default CategoryShop;
+export default SearchProducts;
