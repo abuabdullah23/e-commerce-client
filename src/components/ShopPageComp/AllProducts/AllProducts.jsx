@@ -8,6 +8,7 @@ import ShopProducts from '../ShopProducts/ShopProducts';
 import Pagination from '../../Pagination/Pagination';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPriceRangeProducts, getQueryProducts } from '../../../redux/reducers/home/homeReducers';
+import PriceRange from '../../PriceRange/PriceRange';
 
 const AllProducts = () => {
     const dispatch = useDispatch();
@@ -19,6 +20,8 @@ const AllProducts = () => {
     const [sortPrice, setSortPrice] = useState('');
     const [styles, setStyles] = useState('grid');
     const [pageNumber, setPageNumber] = useState(1);
+    const [lowPrice, setLowPrice] = useState(priceRange.low);
+    const [highPrice, setHighPrice] = useState(priceRange.high);
 
     // get price range products
     useEffect(() => {
@@ -30,6 +33,8 @@ const AllProducts = () => {
         setRangeState({
             values: [priceRange.low, priceRange.high]
         })
+        // setLowPrice(priceRange.low)
+        // setHighPrice(priceRange.high)
     }, [priceRange])
 
     // query category for search by category
@@ -47,6 +52,8 @@ const AllProducts = () => {
             getQueryProducts({
                 low: rangeState.values[0],
                 high: rangeState.values[1],
+                // low: lowPrice,
+                // high: highPrice,
                 category,
                 ratingRange,
                 pageNumber,
@@ -55,6 +62,8 @@ const AllProducts = () => {
     }, [
         rangeState.values[0],
         rangeState.values[1],
+        // lowPrice,
+        // highPrice,
         category,
         ratingRange,
         pageNumber,
@@ -105,6 +114,13 @@ const AllProducts = () => {
                                 <span className='text-lg font-bold text-red-500 dark:text-slate-300'>${Math.floor(rangeState.values[0])} - ${Math.floor(rangeState.values[1])}</span>
                             </div>
                         </div>
+
+
+                        {/* Custom Price Range */}
+                        {/* <PriceRange
+                            range={priceRange}
+                            setLowPrice={setLowPrice}
+                            setHighPrice={setHighPrice} /> */}
 
                         {/* show rating wise products */}
                         <div className='py-2 flex flex-col gap-5 md:mb-8'>
