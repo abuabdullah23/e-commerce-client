@@ -10,7 +10,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <App />
     <Toaster toastOptions={{
-      position: 'top-right',
+      position: 'bottom-right',
       style: {
         background: 'white',
         color: 'black'

@@ -1,32 +1,62 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Headers from '../../components/Headers/Headers';
 import Footer from '../../components/Footer/Footer';
 import SocialLogin from '../../components/SocialLogin/SocialLogin';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import Loader from '../../components/Loader/Loader';
+import registrationAnimation from '../../assets/images/lottie/register_animation.json'
+import LottieComp from '../../components/LottieComp/LottieComp';
+import { useDispatch, useSelector } from 'react-redux';
+import { customerRegister, messageClear } from '../../redux/reducers/auth/authReducers';
+import toast from 'react-hot-toast';
+import FadeLoader from 'react-spinners/FadeLoader'
+
 
 const Register = () => {
     const [seePass, setSeePass] = useState(false);
-    const loader = false;
+    const dispatch = useDispatch();
+    const { loader, successMessage, errorMessage, userInfo } = useSelector(state => state.auth);
+    const navigate = useNavigate();
 
     // handle registration form value
     const handleRegister = (event) => {
         event.preventDefault();
         const form = event.target;
-        const email = form.email.value;
         const name = form.name.value;
+        const email = form.email.value;
         const password = form.password.value;
         const registerData = {
-            email,
             name,
+            email,
             password,
         }
-        console.log(registerData);
+        dispatch(customerRegister(registerData))
     }
+
+    // for show error or success message in toast
+    useEffect(() => {
+        if (successMessage) {
+            toast.success(successMessage || 'Registration Successful')
+            dispatch(messageClear())
+            if (userInfo) {
+                navigate('/')
+            }
+        }
+        if (errorMessage) {
+            toast.error(errorMessage || 'Not Successful')
+            dispatch(messageClear())
+        }
+    }, [successMessage, errorMessage])
+
 
     return (
         <div>
+            {
+                loader && <div className='w-screen h-screen flex justify-center items-center fixed left-0 top-0 bg-[#38303033] z-[999]'>
+                    <FadeLoader />
+                </div>
+            }
             <Headers />
             <div className='bg-slate-200 dark:bg-slate-800 transition-colors duration-300'>
                 <div className='w-full justify-center items-center p-10 sm:p-3'>
@@ -77,9 +107,7 @@ const Register = () => {
                                 <p>You have no account ? <Link className='text-blue-500' to='/login'>Login</Link></p>
                             </div>
                         </div>
-                        <div className='w-full h-full p-4'>
-                            <img className='w-full h-[95%]' src={`${import.meta.env.VITE_ClientSide_Url}/images/login.jpg`} alt="login image" />
-                        </div>
+                        <LottieComp Animation={registrationAnimation} />
                     </div>
                 </div>
             </div>

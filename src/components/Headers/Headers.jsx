@@ -7,9 +7,10 @@ import { BiSun } from 'react-icons/bi'
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import navItems from './NavItems';
+import { useSelector } from 'react-redux'
 
 const Headers = () => {
-    const user = true;
+    const { userInfo } = useSelector(state => state.auth);
     const [showSidebar, setShowSidebar] = useState(false);
     const [theme, setTheme] = useState(null);
     const { pathname } = useLocation();
@@ -47,7 +48,7 @@ const Headers = () => {
                         <ul className='flex justify-start items-center gap-8'>
                             <li className='flex items-center gap-2 text-sm relative after:absolute after:h-[18px] after:w-[1px] after:bg-[#afafaf] after:-right-[16px]'>
                                 <span><GrMail /></span>
-                                <span>user@gmail.com</span>
+                                <span>{userInfo.email}</span>
                             </li>
                             <span className='text-base'>Multi vendor E-Commerce</span>
                         </ul>
@@ -71,16 +72,16 @@ const Headers = () => {
                                 <div className='group cursor-pointer text-slate-800 text-sm flex justify-center items-center gap-1 relative after:absolute after:h-[18px] after:w-[1px] after:bg-[#afafaf] after:-right-[16px] before:absolute before:h-[18px] before:w-[1px] before:bg-[#afafaf] before:-left-[20px]'>
                                     <img src={`${import.meta.env.VITE_ClientSide_Url}/images/language.png`} alt="language icon" />
                                     <span><MdOutlineKeyboardArrowDown className='dark:text-gray-300' /></span>
-                                    <ul className='absolute top-8 invisible transition-all duration-200 rounded-sm text-white py-2 px-3 w-fit flex flex-col gap-3 group-hover:visible group-hover:top-6 group-hover:bg-black'>
+                                    <ul className='absolute top-8 invisible transition-all duration-200 rounded-sm text-white py-2 px-3 w-fit flex flex-col gap-3 group-hover:visible group-hover:top-6 group-hover:bg-black dark:group-hover:bg-slate-500 z-10'>
                                         <li className='hover:bg-slate-700 px-1'>Bangla</li>
                                         <li className='hover:bg-slate-700 px-1'>English</li>
                                     </ul>
                                 </div>
                                 {
-                                    user ? <Link to={'/dashboard'} className='flex items-center justify-center gap-2 cursor-pointer text-sm'>
+                                    userInfo ? <Link to={'/dashboard'} className='flex items-center justify-center gap-2 cursor-pointer text-sm'>
                                         <span><FaUser /></span>
-                                        <span>User Name</span>
-                                    </Link> : <Link className='flex items-center justify-center gap-2 cursor-pointer text-sm'>
+                                        <span>{userInfo.name}</span>
+                                    </Link> : <Link to='/login' className='flex items-center justify-center gap-2 cursor-pointer text-sm'>
                                         <span><FaLock /></span>
                                         <span>Login</span>
                                     </Link>
@@ -173,10 +174,10 @@ const Headers = () => {
                                 </ul>
                             </div>
                             {
-                                user ? <Link to={'/dashboard'} className='flex items-center justify-center gap-2 cursor-pointer text-sm'>
+                                userInfo ? <Link to={'/dashboard'} className='flex items-center justify-center gap-2 cursor-pointer text-sm'>
                                     <span><FaUser /></span>
-                                    <span>User Name</span>
-                                </Link> : <Link className='flex items-center justify-center gap-2 cursor-pointer text-sm'>
+                                    <span>{userInfo.name}</span>
+                                </Link> : <Link to='/login' className='flex items-center justify-center gap-2 cursor-pointer text-sm'>
                                     <span><FaLock /></span>
                                     <span>Login</span>
                                 </Link>
@@ -229,7 +230,7 @@ const Headers = () => {
                         <ul className='flex flex-col justify-start items-start gap-3 text-[#1c1c1c] dark:text-gray-300'>
                             <li className='flex justify-start items-center gap-2 text-sm'>
                                 <span><GrMail /></span>
-                                <span>myshop@gmail.com</span>
+                                <span>{userInfo.email}</span>
                             </li>
                             <span className='text-sm'>Multi vendor e-commerce</span>
                         </ul>
